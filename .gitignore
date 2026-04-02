@@ -2,3 +2,5 @@
 */taskmanager
 *__pycache__
 */migrations
+*/frontend
+*/node_modules
