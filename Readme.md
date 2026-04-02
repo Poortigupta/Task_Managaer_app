@@ -6,8 +6,6 @@ TaskFlow is a professional, full-stack task management application designed to h
 
 ## 📸 Screenshots
 
-*(Note: Create a folder named `screenshots` in your main project directory and place your images there to make these links work).*
-
 ### Light Mode Interface
 ![TaskFlow Light Mode](./screenshots/light-mode.png)
 
@@ -64,3 +62,10 @@ To further enhance the productivity capabilities of TaskFlow, the following feat
 - **Task Categories & Tags:** Enable users to group tasks into custom categories (e.g., "Work," "Personal," "Urgent") for improved sorting.
 - **JWT Authentication:** Upgrade the simulated session management to full JSON Web Tokens (JWT) for enterprise-grade security and secure route protection.
 - **Drag-and-Drop Kanban Board:** Introduce a visual board layout where users can drag tasks between "To Do," "In Progress," and "Done" columns.
+
+## 🧠 Key Technical Decisions
+
+* **Application Factory Pattern:** Instead of a single global Flask app, the backend uses a factory function (`create_app()`) to instantiate the application. This ensures clean separation of concerns and makes the app highly scalable and testable.
+* **Blueprint Routing:** API routes are modularized using Flask Blueprints (`/api/users`, `/api/tasks`) to prevent routing bottlenecks as the application grows.
+* **Vite Proxying:** To prevent Cross-Origin Resource Sharing (CORS) errors during development, the Vite frontend is configured to proxy all `/api` requests directly to the Flask backend, keeping the architecture secure and unified.
+* **CSS Variables for Theming:** Implemented a pure-CSS light/dark mode toggle using a `data-theme` attribute and CSS variables, avoiding the overhead of heavy third-party UI libraries for a cleaner, faster interface.
