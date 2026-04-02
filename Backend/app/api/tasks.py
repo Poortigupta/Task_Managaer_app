@@ -35,3 +35,33 @@ def create_task():
         "message": "Task created successfully!",
         "task": new_task.to_dict()
     }), 201
+
+# PUT route to edit a task (e.g., mark as completed)
+@tasks_bp.route('/<int:task_id>', methods=['PUT'])
+def update_task(task_id):
+    task = Task.query.get(task_id)
+    if not task:
+        return jsonify({"error": "Task not found"}), 404
+
+    data = request.get_json()
+    # Update fields if they are provided in the request
+    if 'title' in data:
+        task.title = data['title']
+    if 'description' in data:
+        task.description = data['description']
+    if 'is_completed' in data:
+        task.is_completed = data['is_completed']
+
+    db.session.commit()
+    return jsonify({"message": "Task updated!", "task": task.to_dict()}), 200
+
+# DELETE route to remove a task
+@tasks_bp.route('/<int:task_id>', methods=['DELETE'])
+def delete_task(task_id):
+    task = Task.query.get(task_id)
+    if not task:
+        return jsonify({"error": "Task not found"}), 404
+
+    db.session.delete(task)
+    db.session.commit()
+    return jsonify({"message": "Task deleted successfully!"}), 200
