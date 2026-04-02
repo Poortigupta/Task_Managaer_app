@@ -1,9 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
-# Initialize the database extension
-# We do NOT bind it to the app here. That happens later in the App Factory.
+# Setting these up here to avoid circular import errors. 
+# They get bound to the actual Flask app later in __init__.py.
 db = SQLAlchemy()
-
-# Initialize the migration extension to handle PostgreSQL table updates
 migrate = Migrate()
